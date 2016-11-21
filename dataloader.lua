@@ -79,7 +79,9 @@ function DataLoader:run()
                   batch[i]:copy(input)
                   target[i] = sample.target
                end
-               collectgarbage()
+               if _G.dataset.split == 'val' then
+                  collectgarbage()
+               end
                return {
                   input = batch:view(sz * nCrops, table.unpack(imageSize)),
                   target = target,
